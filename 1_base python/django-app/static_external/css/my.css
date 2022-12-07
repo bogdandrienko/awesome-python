@@ -1,0 +1,34 @@
+body {
+    /*background: cyan !important;*/
+    /*color: cyan !important;*/
+    background-image: url("../img/background1.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    /*font-family: ;*/
+    font-family: Rubik, monospace !important;
+}
+
+@font-face {
+    font-family: "Rubik";
+    src: url("../fonts/Rubik.ttf");
+}
+
+div {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.custom-hover :hover{
+    background: cyan !important;
+    color: lime !important;
+}
+
+section {
+    /*background: cyan !important;*/
+    color: cyan !important;
+}
+
+.section-first {
+    /*background: cyan !important;*/
+    color: cyan !important;
+}
