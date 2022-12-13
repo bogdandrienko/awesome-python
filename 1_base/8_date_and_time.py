@@ -27,10 +27,12 @@ print(now1.strftime("%H:%M"))
 print(datetime.datetime.now().strftime("%m-%d-%y, %H:%M:%S"))
 
 # получение timestamp
-val2 = datetime.datetime.timestamp(val1)  # 1670333104.69883
-print(val2)
-val3 = datetime.datetime.fromtimestamp(1620333104.005, tz=None)  # 2021-05-07 02:31:44.005000
-print(val3)
+val3 = datetime.datetime.now()
+val4 = datetime.datetime.timestamp(val3)  # 1670938181.000156
+print(val4)
+
+val5 = datetime.datetime.fromtimestamp(1620333104.005, tz=None)  # 2021-05-07 02:31:44.005000
+print(val5)
 
 # "задержки кода"
 print("stopped")
@@ -48,11 +50,13 @@ def sum1(start_value: int, stop_value: int) -> int:
 
 point1 = time.perf_counter()  # 6161.9708401 <class 'float'>
 print(point1, type(point1))
+
 # ДО ФУНКЦИИ
-res = sum1(1, 1000000)
+res = sum1(1, 10000000)
 print(res)
 # ПОСЛЕ ФУНКЦИИ
-time_elapsed = round(time.perf_counter() - point1, 5)
-print(time_elapsed)
+
+time_elapsed = round(time.perf_counter() - point1, 3)
+print(time_elapsed)  # 0.389
 
 ########################################################################################################################

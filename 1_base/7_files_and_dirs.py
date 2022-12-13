@@ -9,7 +9,7 @@ import shutil
 # режимы: w r a wb rb w+ r+
 
 # ручное закрытие файла
-file1 = open('z_new.txt', 'w')  # если файл в папке 'data' - open('data/z_new.txt', 'w')
+file1 = open('z_new.txt', 'w')  # файловый-объект, если файл в папке 'data' - open('data/z_new.txt', 'w')
 file1.write("Python is awesome!123\n\thi")
 file1.close()
 
@@ -38,14 +38,15 @@ with open('z_new.txt', 'r') as file2:
 dict1 = {"name": "Bogdan"}
 # запись
 with open('data/new.json', 'w') as file1:
+    # todo сразу запись в файл словаря
     json.dump(dict1, file1)
+
+    # todo сначала сериализуем словарь в json_строку
+    # str1_json = json.dumps(dict1)
+    # opened_file.write(str1_json)
+
 dict_str1 = json.dumps(dict1)
 print(dict_str1)
-
-# чтение
-with open('data/new.json', 'r') as file2:
-    dict2 = json.load(file2)
-    print(dict2)
 
 # JSON в виде строки (часто приходит из "интернет" запросов)
 dict_str2 = """[
@@ -57,31 +58,16 @@ dict_str2 = """[
     ]"""
 dict2 = json.loads(dict_str2)
 
-var_dict1 = dict(Age=24, Name='Ally')  # создание словаря
-print(var_dict1)
+# чтение
+with open('data/new.json', 'r') as file2:
+    # todo сразу чтение словаря из файла
+    dict3 = json.load(file2)
+    print(dict3)
 
-var_dict2 = {"Age": 24, "Name": 'Ally'}  # создание словаря
-print(var_dict2)
+    # todo сначала сериализуем json_строку в словарь
+    # dict4 = json.loads(file2.read())
+    # print(dict4, type(dict4))
 
-var_dict3 = {"key": "value"}  # создание словаря
-# var_dict3["Age"] = 24
-# var_dict3["Name"] = 'Ally'
-print(var_dict3)
-
-var_dict4 = {
-    "firstName": "Иван",
-    "lastName": "Иванов",
-    "address": {
-        "streetAddress": "Московское ш., 101, кв.101",
-        "city": "Ленинград",
-        "postalCode": 101101
-    },
-    "phoneNumbers": [
-        "812 123-1234",
-        "916 123-4567"
-    ]
-}
-print(type(var_dict4))
 
 ########################################################################################################################
 
@@ -94,7 +80,10 @@ print(os.getcwd())
 # first = os.path.abspath(os.path.dirname(__file__))  # содержит абсолютный путь к текущему скрипту
 first = ''  # содержит относительный путь к текущему скрипту
 second = "temp\\junk2.txt"  # \ - изоляция символа   \n - перенос строки, \t - табуляция...
-path = os.path.join(first, second)
+third = r"temp\junk2.txt"  # \ - изоляция символа   \n - перенос строки, \t - табуляция...
+fourth = "temp/junk2.txt"  # \ - изоляция символа   \n - перенос строки, \t - табуляция...
+
+path = os.path.join(second, third)
 print(f"path: {path}")
 
 try:
@@ -115,6 +104,7 @@ os.rmdir("data1")
 
 for filename in os.listdir(''):
     print(filename)
+
 
 # os.rename()
 # os.path.exists()

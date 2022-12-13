@@ -1,6 +1,8 @@
 ########################################################################################################################
 # TODO функции
 
+import math
+import time
 from typing import Union
 import operator
 
@@ -14,6 +16,7 @@ def function1():  # определение функции
 # код "после" функции
 
 link1 = function1  # ссылка на функцию
+link1()  # вызов функции
 function1()  # вызов функции
 
 
@@ -58,17 +61,17 @@ print(result3)
 # C++ - статическая типизация (- скорость разработки + скорость работы - к багам)
 
 
-def twice_value4(val1: int | float, val2=2) -> int | float:  # функция с типизацией
+def twice_value4(val1: float, val2=2) -> Union[int, float]:  # функция с типизацией
     result = val1 ** val2
     return result
 
 
-def twice_value5(val1: Union[int, float], val2=2) -> Union[int, float]:  # функция с типизацией
+def twice_value5(val1: float, val2=2) -> int | float:  # функция с типизацией
     result = val1 ** val2
     return result
 
 
-result4 = twice_value4(val1=6) / 10
+result4 = twice_value5(val1=6) / 10
 print(result4)
 
 ########################################################################################################################
@@ -93,29 +96,6 @@ print(all([True, True, True, True]))
 print(all([False, True, True, False]))
 print(all([False, False, False]))
 
-# операторы
-a = 5
-b = 2
-print(operator.truediv(a, b))
-print(operator.floordiv(a, b))
-print(operator.pow(a, b))
-
-# in
-list1 = [1, 2, 3, 4, 5]
-list2 = [6, 7, 8, 9]
-for item in list1:
-    if item in list2:
-        print("overlapping")
-    else:
-        print("not overlapping")
-
-# is
-x = 5
-y = 5
-print(x is y)
-id(x)
-id(y)
-
 
 # ...
 # https://pythonru.com/osnovy/vstroennye-funkcii-python
@@ -130,17 +110,17 @@ def multiply1(a, b):
     return a ** b
 
 
-# multiply2 = lambda a, b: a ** b
-#
-# res4 = multiply1(6, 2)
-# res5 = multiply2(6, 2)
-# print(res4)
-# print(res5)
+multiply2 = lambda a, b: a ** b
+
+res4 = multiply1(6, 2)
+res5 = multiply2(6, 2)
+print(res4)
+print(res5)
 
 peoples1 = [
-    {"name": "Bogdan1", "age": 24},  # dict
-    {"name": "Bogdan1", "age": 22},  # dict
-    {"name": "Bogdan3", "age": 20},  # dict
+    {"name": "Bogdan1", "age": 24},  # dict 24
+    {"name": "Bogdan1", "age": 22},  # dict 22
+    {"name": "Bogdan3", "age": 20},  # dict 20
 ]
 
 
@@ -148,8 +128,11 @@ def sort1(x):
     return x["age"]
 
 
-print(sorted(peoples1, key=sort1, reverse=True))
-print(sorted(peoples1, key=lambda x: x["age"], reverse=True))
+sorted_peoples1 = sorted(peoples1, key=lambda x: x["age"], reverse=True)
+print(sorted_peoples1)
+
+sorted_peoples1.sort(key=lambda x: x["age"], reverse=True)  # меняет исходный объект
+print(sorted_peoples1)
 
 peoples2 = [
     [1, 1, 99, 4],  # tuple
@@ -238,21 +221,27 @@ def recursion_sum1(stop_value: int):
 
 print(recursion_sum1(10))
 
-
 # проверка палиндрома
-def is_palindrome1(text: str):
+str5 = "мадам"
+str6 = str5[::-1]
+cond5 = str5 == str5[::-1]
+
+
+def is_palindrome1(text1: str):
+    return text1 == text1[::-1]
+
+    # text2 = text1[::-1]
+    # if text1 == text2:
+    #     return True
+    # else:
+    #     return False
+
+
+def is_palindrome2(text: str):
     if len(text) < 1:
         return True
-    if text[0] == text[-1]:
-        return is_palindrome1(text[1:-1])
-    else:
-        return False
-
-
-def is_palindrome2(text1: str):
-    text2 = text1[::-1]
-    if text1 == text2:
-        return True
+    if text[0] == text[-1]:  # "p" == "p"
+        return is_palindrome2(text[1:-1])
     else:
         return False
 
@@ -265,6 +254,29 @@ print(is_palindrome2("Мадам"))
 ########################################################################################################################
 # TODO области видимости
 
+res2 = "Привет"  # глобальная область видимости
+
+
+def sym1():
+    res2 = "Пока"  # локальная область видимости func1
+
+
+def sym2():
+    global res2  # использование переменной из глобальной области видимости
+    res2 = "Пока"  # локальная область видимости func1
+
+
+print(res2)
+sym1()
+print(res2)
+
+time.sleep(2.0)
+
+print(res2)
+sym2()
+print(res2)
+
+# пример сложнее
 local_var = 12  # глобальная область видимости
 print(local_var)
 
@@ -290,18 +302,21 @@ def func1(var1):
 
 func1(local_var)
 
-
 ########################################################################################################################
 
 ########################################################################################################################
 # TODO __name__ == '__main__'
 
+import _for_import
+
+
 def print_hi(name):
     print(f'Hi, {name}')
+    _for_import.summing(12, 13)
 
 
 if __name__ == '__main__':
-    print_hi('Bogdan')
+    print_hi('Python')
 
 
 ########################################################################################################################

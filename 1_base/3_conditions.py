@@ -50,6 +50,7 @@ else:
     print("Неизвестный фрукт")
 
 # таблица истинности
+# https://ru.wikipedia.org/wiki/%D0%A2%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0_%D0%B8%D1%81%D1%82%D0%B8%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8
 cond1 = 12 > 5
 cond2 = 12 == 12
 cond3 = 12 < 7
@@ -96,6 +97,20 @@ res2 = a if a < b else b
 
 print(res)
 print(res2)
+
+
+# вызов функций
+def print1():
+    print("print1")
+
+
+def print2():
+    print("print2")
+
+
+res3 = print1() if a < b else print2()
+res3 = print1 if a < b else print2
+res3()
 
 a, b = 10, 20
 print((b, a)[a < b])

@@ -11,6 +11,9 @@ for j in "Python":
 for i in range(1, 100, 1):
     print(i)
 
+for i in range(100, 1, -1):  # [100, 99... 2]
+    print(i)
+
 for i in range(1, 100, 1):
     print(i)
     for j in "Python":
@@ -42,7 +45,10 @@ for key in value7.keys():
     print(key)
 for value in value7.values():
     print(value)
-for key, value in value7.items():
+for item in value7.items():
+    print(item)
+    print(item[0], item[1])
+for key, value in value7.items():  # auto unpacking
     print(key, value)
 
 ########################################################################################################################
@@ -67,6 +73,12 @@ while True:
     elif i >= 7:
         break  # останавливает цикл
     print(i)
+
+########################################################################################################################
+
+
+########################################################################################################################
+# TODO "таймер" с использованием цикла
 
 # импорт библиотеки "time"
 import time
@@ -93,7 +105,7 @@ while True:
             minutes += 1
             seconds = 0
 
-    time.sleep(secs=1.0)
+    time.sleep(1.0)
     print(f"{hours}:{minutes}" + ":" + str(seconds))
 # код после цикла
 

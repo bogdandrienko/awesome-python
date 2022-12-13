@@ -10,6 +10,10 @@
 # print(dict1["name1"])
 # KeyError - ключа нет в словаре
 
+print("12")
+print(1 / 0)  # падение потока (кода)
+print("13")
+
 try:
     print("опасные операции 1")
     print(1 / 0)
@@ -36,13 +40,17 @@ else:
 finally:
     print("Уведомление пользователя о статусе перевода (успешный / не успешный)")
 
-
 # вызов исключения
-def sum2(a, b):
-    result = a + b
-    if result <= 0:
-        raise ArithmeticError
-    return result
+try:
+    def div2(a, b):
+        if b == 0:
+            raise ZeroDivisionError  # вызов исключения
+        result = a / b
+        if result <= 0:
+            raise ArithmeticError  # вызов исключения
+        return result
+except Exception as error:
+    print(error)
 
 
 ########################################################################################################################
