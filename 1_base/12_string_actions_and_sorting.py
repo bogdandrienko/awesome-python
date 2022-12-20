@@ -3,7 +3,6 @@
 
 import base64
 import chardet
-import hashlib
 
 list1 = [1, 2, 5, [3, 2, 6], {"key_1": 1}, {1, 2, 3, 5, 7, "123"}, 5]
 tuple1 = (1, 2, 5, [3, 2, 6], {"key_1": 1}, {1, 2, 3, 5, 7, "123"}, 5)
@@ -77,10 +76,6 @@ print(text1[find1:find1 + len(substring):1])
 # TODO кодировки
 
 
-# hash_object = hashlib.md5("12345".encode())
-hash_object = hashlib.sha256("key1".encode('utf-8'))
-print(hash_object.hexdigest())
-
 # utf-8 win-1251 win-1252 ascii
 
 str1 = b'123BNO'
@@ -108,5 +103,17 @@ print(f"source1: {source1}\n")
 
 source2 = source1.decode(encoding='utf-8')
 print(f"source2: {source2}\n")
+
+########################################################################################################################
+
+########################################################################################################################
+# TODO хэширование
+
+import hashlib
+import uuid
+
+# hash_object = hashlib.md5("12345".encode())
+hash_object = hashlib.sha256("key1".encode('utf-8'))
+print(hash_object.hexdigest())
 
 ########################################################################################################################

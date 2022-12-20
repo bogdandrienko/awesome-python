@@ -1,149 +1,122 @@
+########################################################################################################################
+# TODO интерфейс на pyqt
+
 import sys
-from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout, QLineEdit, QLabel, QCheckBox, QSlider)
-import cv2
+import threading
+import multiprocessing
+from PyQt6 import QtWidgets, QtCore, QtGui
 
 
-# Прочитать изображение в оперативную память (место где лежит)
-# Показываем статистику по изображению
-# Получить от пользователя данные для изменения изображения
-# Изменяем изображение в памяти
-# Сохраняем (перезаписываем данные в памяти)
+# from PyQt6.QtWidgets import (
+#     QApplication,
+#     QCheckBox,
+#     QComboBox,
+#     QDateEdit,
+#     QDateTimeEdit,
+#     QDial,
+#     QDoubleSpinBox,
+#     QFontComboBox,
+#     QLabel,
+#     QLCDNumber,
+#     QLineEdit,
+#     QMainWindow,
+#     QProgressBar,
+#     QPushButton,
+#     QRadioButton,
+#     QSlider,
+#     QSpinBox,
+#     QTimeEdit,
+#     QVBoxLayout,
+#     QWidget, QGridLayout,
+# )
 
-class Example(QWidget):
 
+class PyQtWindow(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.grid = QGridLayout()
+        self.layout = QtWidgets.QGridLayout(self)
 
-        label_path = QLabel("укажите путь к изображению")
-        self.line_edit_path = QLineEdit("temp/image.jpg")
-        self.is_file_have = QCheckBox("наличие файла")
-        btn_check = QPushButton("check")
-        btn_check.clicked.connect(self.read_image)
+        # self.layout = QtWidgets.QVBoxLayout(self)
+        # self.ui_window = QtWidgets.QHBoxLayout(self)
 
-        label_width = QLabel("ширина")
-        self.line_edit_width = QLineEdit("0")
-        label_height = QLabel("высота")
-        self.line_edit_height = QLineEdit("0")
+        self.label_path = QtWidgets.QLabel("...")
+        self.layout.addWidget(self.label_path, 0, 0)
 
-        self.slider_quality = QSlider()
-        self.slider_quality.setMinimum(1)
-        self.slider_quality.setMaximum(100)
-        self.slider_quality.setValue(95)
+        self.line_edit_path = QtWidgets.QLineEdit("Hello World!")
+        # self.line_edit.textChanged.connect(self.line_edit_text_changed)
+        self.layout.addWidget(self.line_edit_path, 0, 1)
 
-        self.grid.addWidget(label_path, 0, 0)
+        self.check_box_is_equal = QtWidgets.QCheckBox("")
+        self.layout.addWidget(self.check_box_is_equal, 1, 0)
 
-        self.grid.addWidget(self.line_edit_path, 1, 0)
-        self.grid.addWidget(self.is_file_have, 1, 1)
-        self.grid.addWidget(btn_check, 1, 2)
+        self.button = QtWidgets.QPushButton("request")
+        self.button.clicked.connect(self.start)
+        self.layout.addWidget(self.button, 1, 1)
 
-        self.grid.addWidget(label_width, 3, 0)
-        self.grid.addWidget(label_height, 3, 1)
+        # self.temp_box = QtWidgets.QDoubleSpinBox()
 
-        self.grid.addWidget(self.line_edit_width, 4, 0)
-        self.grid.addWidget(self.line_edit_height, 4, 1)
-        self.grid.addWidget(self.slider_quality, 4, 2)
+        # self.combo_box_filter = QComboBox()
+        # self.combo_box_filter.addItem("usd")
+        # self.combo_box_filter.addItem("eur")
+        # self.combo_box_filter.addItems(["gbp", "cny", "pln", "rub"])
 
-        btn_start = QPushButton("start")
-        self.grid.addWidget(btn_start, 5, 0)
-        btn_start.clicked.connect(self.computing_image)
+        # self.slider_quality = QSlider(Qt.Horizontal)
+        # self.slider_quality = QSlider()
+        # self.slider_quality.setMinimum(1)
+        # self.slider_quality.setMaximum(100)
+        # self.slider_quality.setValue(95)
+        # self.layout.addWidget(self.slider_quality, 4, 5)
 
-        self.setLayout(self.grid)
+        # self.pixmap = QPixmap('python.jpeg')
+        # self.label2.setPixmap(self.pixmap)
 
-        self.img = None
-
-        self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Фотошоп 0.1')
+        self.setWindowTitle("Create user in Django")
+        self.resize(640, 480)
         self.show()
 
-    def read_image(self):
-        try:
-            path = self.line_edit_path.text()
-            self.img = cv2.imread(path, cv2.IMREAD_COLOR)  # cv2.IMREAD_GRAYSCALE
-            h, w, c = self.img.shape
-            self.line_edit_width.setText(str(w))
-            self.line_edit_height.setText(str(h))
-            self.is_file_have.setChecked(True)
-        except Exception as error:
-            print(error)
-            self.is_file_have.setChecked(False)
+    def start(self):
+        url = self.line_edit_path.text()
+        self.label_path.setText(url[::-1])
 
-    def computing_image(self):
+    def closeEvent(self, event: QtGui.QCloseEvent):
+        reply = QtWidgets.QMessageBox.question(self, 'Внимание', 'Вы действительно хотите выйти?',
+                                               QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No,
+                                               QtWidgets.QMessageBox.No)
 
-        new_width = int(self.line_edit_width.text())
-        new_height = int(self.line_edit_height.text())
-        quality = int(self.slider_quality.value())
+        if reply == QtWidgets.QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 
-        img = self.img
-        resized = cv2.resize(img, (new_width // 2, new_height // 2), interpolation=cv2.INTER_AREA)
-        image_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
+    def get_speed_video_stream_button(self):
+        widget = self.speed_video_stream
+        value, success = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                          f'{widget.text().split(":")[0].strip()} value:',
+                                                          1.0, 0.01, 50.0, 2)
+        if success:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
-        cv2.imshow('image', img)
-        cv2.imshow('resized', resized)
-        cv2.imshow('image_gray', image_gray)
-        cv2.waitKey(1)
-        cv2.imwrite('temp/image_gray.jpg', image_gray, [cv2.IMWRITE_JPEG_QUALITY, quality])
+    def get_sensitivity_analysis_button(self):
+        widget = self.sensitivity_analysis
+        value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
+                                                        f'{widget.text().split(":")[0].strip()} value:',
+                                                        text=f'{widget.text().split(":")[1].strip()}')
+        if success:
+            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
+if __name__ == "__main__":
+    pyqt_app = QtWidgets.QApplication([])
+    pyqt_ui = PyQtWindow()
+    sys.exit(pyqt_app.exec())
+
 
 ########################################################################################################################
 
-import sys
-import time
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QGridLayout, QPushButton, QLineEdit
-import threadi  # операции в другом потоке
-import asyncio  # асинхронные операции
-import multiprocessing  # операции в другом процессе
-import requests  # библиотека для синхронных HTTP запросов
-import aiohttp  # библиотека для асинхронных HTTP запросов
-
-
-class MyUiClass(QWidget):
-    def __init__(self, width=640, height=480, title="title"):
-        QWidget.__init__(self)
-
-        self.layout = QGridLayout()
-        self.setLayout(self.layout)
-
-        self.line_edit_domen = QLineEdit('http://192.168.1.121:5000/get_all_rows/')
-        self.layout.addWidget(self.line_edit_domen, 0, 0)
-
-        self.label_result = QLabel('')
-        self.layout.addWidget(self.label_result, 1, 0)
-
-        self.push_button_start = QPushButton('sync request')
-        self.push_button_start.clicked.connect(self.sync_request)
-        self.layout.addWidget(self.push_button_start, 1, 1)
-
-        self.setWindowTitle(title)
-        self.resize(width, height)
-        self.show()
-
-    def sync_request(self):
-        headers = {
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                          'Chrome/102.0.0.0 Safari/537.36'
-        }
-        response = requests.get(url=self.line_edit_domen.text(), headers=headers)
-        # print(response.text)
-        # print(response.json())
-        self.label_result.setText(response.text)
-
-
-app = QApplication(sys.argv)
-ui = MyUiClass(640, 480, 'api')
-app.exec()
-!
-
 ########################################################################################################################
+# TODO машинное зрение
 
-
-# UI
 class AppContainerClass:
     def __init__(self):
         self.app = QtWidgets.QApplication([])
@@ -367,17 +340,17 @@ class MainWidgetClass(QtWidgets.QWidget):
                                                                 'all'], 'none')
         self.resolution_debug_1 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '320x240',
                                                                         default=True)
-        self.resolution_debug_1.toggled.connect(self.set_resolution_debug(self.resolution_debug_1, 320, 240))
-        self.resolution_debug_2 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '640x480')
-        self.resolution_debug_2.toggled.connect(self.set_resolution_debug(self.resolution_debug_2, 640, 480))
-        self.resolution_debug_3 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '1280x720')
-        self.resolution_debug_3.toggled.connect(self.set_resolution_debug(self.resolution_debug_3, 1280, 720))
-        self.resolution_debug_4 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '1920x1080')
-        self.resolution_debug_4.toggled.connect(self.set_resolution_debug(self.resolution_debug_4, 1920, 1080))
-        self.resolution_debug_5 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '2560x1600')
-        self.resolution_debug_5.toggled.connect(self.set_resolution_debug(self.resolution_debug_5, 2560, 1600))
-        self.resolution_debug_6 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '3840x2160')
-        self.resolution_debug_6.toggled.connect(self.set_resolution_debug(self.resolution_debug_6, 3840, 2160))
+        # self.resolution_debug_1.toggled.connect(self.set_resolution_debug(self.resolution_debug_1, 320, 240))
+        # self.resolution_debug_2 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '640x480')
+        # self.resolution_debug_2.toggled.connect(self.set_resolution_debug(self.resolution_debug_2, 640, 480))
+        # self.resolution_debug_3 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '1280x720')
+        # self.resolution_debug_3.toggled.connect(self.set_resolution_debug(self.resolution_debug_3, 1280, 720))
+        # self.resolution_debug_4 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '1920x1080')
+        # self.resolution_debug_4.toggled.connect(self.set_resolution_debug(self.resolution_debug_4, 1920, 1080))
+        # self.resolution_debug_5 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '2560x1600')
+        # self.resolution_debug_5.toggled.connect(self.set_resolution_debug(self.resolution_debug_5, 2560, 1600))
+        # self.resolution_debug_6 = AppContainerClass.create_qradiobutton(self.h_layout_debug_3, '3840x2160')
+        # self.resolution_debug_6.toggled.connect(self.set_resolution_debug(self.resolution_debug_6, 3840, 2160))
         # IMPORTS
         self.h_layout_g_imports = QtWidgets.QHBoxLayout()
         self.v_layout_m.addLayout(self.h_layout_g_imports)
@@ -418,22 +391,6 @@ class MainWidgetClass(QtWidgets.QWidget):
         value, success = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
                                                           f'{widget.text().split(":")[0].strip()} value:',
                                                           1.0, 0.01, 50.0, 2)
-        if success:
-            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
-
-    def get_speed_video_stream_button(self):
-        widget = self.speed_video_stream
-        value, success = QtWidgets.QInputDialog.getDouble(self, f'Set {widget.text().split(":")[0].strip()}',
-                                                          f'{widget.text().split(":")[0].strip()} value:',
-                                                          1.0, 0.01, 50.0, 2)
-        if success:
-            widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
-
-    def get_sensitivity_analysis_button(self):
-        widget = self.sensitivity_analysis
-        value, success = QtWidgets.QInputDialog.getText(self, f'Set {widget.text().split(":")[0].strip()}',
-                                                        f'{widget.text().split(":")[0].strip()} value:',
-                                                        text=f'{widget.text().split(":")[1].strip()}')
         if success:
             widget.setText(f'{widget.text().split(":")[0].strip()} : {str(value)}')
 
@@ -652,7 +609,6 @@ class MainWidgetClass(QtWidgets.QWidget):
         try:
             self.widget_data_value.setText(f"{value}")
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'set_data_func error : {ex}')
 
     def create_data_func(self):
@@ -711,7 +667,6 @@ class MainWidgetClass(QtWidgets.QWidget):
             }
             return data
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'create_data_func error : {ex}')
 
     def play_btn_func(self):
@@ -719,7 +674,6 @@ class MainWidgetClass(QtWidgets.QWidget):
             data = self.create_data_func()
             self.play_f(data=data)
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'play_btn_func error : {ex}')
 
     def snapshot_btn_func(self):
@@ -727,22 +681,18 @@ class MainWidgetClass(QtWidgets.QWidget):
             data = self.create_data_func()
             self.snapshot_f(data=data)
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'snapshot_btn_func error : {ex}')
 
     def export_settings_func(self):
         try:
             data = self.create_data_func()
             del data['widget']
-            FileSettings.export_settings(data)
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'export_settings_func error : {ex}')
 
     def import_settings_func(self):
         try:
             data = self.create_data_func()
-            data = FileSettings.import_settings(data)
             self.protocol_cam_type.setText(f'{self.protocol_cam_type.text().split(":")[0].strip()} : '
                                            f'{str(data["protocol_cam_type"])}')
             self.port_cam.setText(f'{self.port_cam.text().split(":")[0].strip()} : '
@@ -805,30 +755,18 @@ class MainWidgetClass(QtWidgets.QWidget):
             self.name_snapshot.setText(f'{self.name_snapshot.text().split(":")[0].strip()} : '
                                        f'{str(data["name_snapshot"])}')
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'import_settings_func error : {ex}')
 
     def auto_import_settings_func(self):
         try:
             data = self.create_data_func()
-            data = FileSettings.import_settings(data)
             if data['auto_import_check']:
                 self.import_settings_func()
         except Exception as ex:
-            LoggingClass.logging(ex)
             print(f'auto_import_settings_func error : {ex}')
 
     def auto_play_func(self):
-        try:
-            data = self.create_data_func()
-            _data = FileSettings.import_settings(data)
-            _data['widget'] = data['widget']
-            if _data['auto_play_check']:
-                self.play_f(data=_data)
-                self.showMinimized()
-        except Exception as ex:
-            LoggingClass.logging(ex)
-            print(f'auto_play_func error : {ex}')
+        pass
 
 
 def play_func(data: dict):
@@ -837,9 +775,9 @@ def play_func(data: dict):
         play = True
 
         def play_analyze():
-            AnalyzeClass.start_analyze(data=CopyDictionary.get_all_sources(data, {'pause': pause}))
+            pass
 
-        threading.Thread(target=play_analyze, args=()).start()
+        pass
     except Exception as ex:
         print(ex)
         with open('log.txt', 'a') as log:
@@ -862,12 +800,12 @@ def quit_func():
 
 
 def snapshot_func(data: dict):
-    threading.Thread(target=AnalyzeClass.make_snapshot, args=(data,)).start()
+    pass
 
 
 # MAIN
 if __name__ == "__main__":
-    freeze_support()
+    multiprocessing.freeze_support()
     play = True
     app_container = AppContainerClass()
     widget = app_container.create_ui(title="analysis", width=300, height=300, icon="icon.ico",
@@ -877,186 +815,3 @@ if __name__ == "__main__":
     sys.exit(app_container.app.exec())
 
 ########################################################################################################################
-
-import sys
-from PyQt5.QtWidgets import (QWidget, QPushButton, QApplication, QGridLayout, QLineEdit, QLabel, QCheckBox, QSlider)
-import cv2
-
-
-# Прочитать изображение в оперативную память (место где лежит)
-# Показываем статистику по изображению
-# Получить от пользователя данные для изменения изображения
-# Изменяем изображение в памяти
-# Сохраняем (перезаписываем данные в памяти)
-
-class Example(QWidget):
-
-    def __init__(self):
-        super().__init__()
-
-        self.grid = QGridLayout()
-
-        label_path = QLabel("укажите путь к изображению")
-        self.line_edit_path = QLineEdit("temp/image.jpg")
-        self.is_file_have = QCheckBox("наличие файла")
-        btn_check = QPushButton("check")
-        btn_check.clicked.connect(self.read_image)
-
-        label_width = QLabel("ширина")
-        self.line_edit_width = QLineEdit("0")
-        label_height = QLabel("высота")
-        self.line_edit_height = QLineEdit("0")
-
-        self.slider_quality = QSlider()
-        self.slider_quality.setMinimum(1)
-        self.slider_quality.setMaximum(100)
-        self.slider_quality.setValue(95)
-
-        self.grid.addWidget(label_path, 0, 0)
-
-        self.grid.addWidget(self.line_edit_path, 1, 0)
-        self.grid.addWidget(self.is_file_have, 1, 1)
-        self.grid.addWidget(btn_check, 1, 2)
-
-        self.grid.addWidget(label_width, 3, 0)
-        self.grid.addWidget(label_height, 3, 1)
-
-        self.grid.addWidget(self.line_edit_width, 4, 0)
-        self.grid.addWidget(self.line_edit_height, 4, 1)
-        self.grid.addWidget(self.slider_quality, 4, 2)
-
-        btn_start = QPushButton("start")
-        self.grid.addWidget(btn_start, 5, 0)
-        btn_start.clicked.connect(self.computing_image)
-
-        self.setLayout(self.grid)
-
-        self.img = None
-
-        self.setGeometry(300, 300, 300, 200)
-        self.setWindowTitle('Фотошоп 0.1')
-        self.show()
-
-    def read_image(self):
-        try:
-            path = self.line_edit_path.text()
-            self.img = cv2.imread(path, cv2.IMREAD_COLOR)  # cv2.IMREAD_GRAYSCALE
-            h, w, c = self.img.shape
-            self.line_edit_width.setText(str(w))
-            self.line_edit_height.setText(str(h))
-            self.is_file_have.setChecked(True)
-        except Exception as error:
-            print(error)
-            self.is_file_have.setChecked(False)
-
-    def computing_image(self):
-
-        new_width = int(self.line_edit_width.text())
-        new_height = int(self.line_edit_height.text())
-        quality = int(self.slider_quality.value())
-
-        img = self.img
-        resized = cv2.resize(img, (new_width // 2, new_height // 2), interpolation=cv2.INTER_AREA)
-        image_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
-
-        cv2.imshow('image', img)
-        cv2.imshow('resized', resized)
-        cv2.imshow('image_gray', image_gray)
-        cv2.waitKey(1)
-        cv2.imwrite('temp/image_gray.jpg', image_gray, [cv2.IMWRITE_JPEG_QUALITY, quality])
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
-
-
-########################################################################################################################
-
-import random
-import sys
-import time
-import aiohttp
-import asyncio
-import json
-
-from PyQt6.QtGui import QPixmap
-from PyQt6.QtWidgets import (
-    QApplication,
-    QLabel,
-    QLineEdit,
-    QMainWindow,
-    QPushButton,
-    QGridLayout,
-    QWidget
-)
-
-
-class MainWindow(QMainWindow):
-
-    def __init__(self):
-        super().__init__()
-
-        layout = QGridLayout()
-
-        self.label1 = QLabel("Данные от сервера")
-        layout.addWidget(self.label1, 1, 1)
-
-        self.lineedit1 = QLineEdit("стандартный текст")
-        layout.addWidget(self.lineedit1, 2, 1)
-
-        self.label2 = QLabel(self)
-        layout.addWidget(self.label1, 3, 1)
-        self.pixmap = QPixmap('python.jpeg')
-        self.label2.setPixmap(self.pixmap)
-
-        pushbutton1 = QPushButton("старт")
-        layout.addWidget(pushbutton1, 4, 2)
-        pushbutton1.clicked.connect(self.click_button_1)
-
-        widget = QWidget()
-        widget.setLayout(layout)
-        self.setCentralWidget(widget)
-        self.setWindowTitle("CRUD PYQT6")
-        self.setGeometry(1400, 900, 1400, 900)
-        self.show()
-
-    def click_button_1(self) -> None:
-        print("push!")
-
-        MainWindow.set_text(elem=self.label1, text="...ОБНОВЛЕНИЕ...")
-        time.sleep(0.1)
-        MainWindow.set_text(elem=self.label1, text="...ЗАВЕРШЕНО...")
-        time.sleep(0.1)
-        MainWindow.set_text(elem=self.label1, text=MainWindow.get_text(elem=self.lineedit1))
-
-        self.get_data(count=random.randint(1, 10))
-
-    @staticmethod
-    def set_text(elem, text: str) -> None:
-        elem.setText(text)
-
-    @staticmethod
-    def get_text(elem) -> str:
-        return elem.text()
-
-    def get_data(self, count: int) -> None:
-        async def main():
-            async with aiohttp.ClientSession() as session:
-                async with session.get('https://jsonplaceholder.typicode.com/posts') as resp_object:
-                    json_dict = await resp_object.json()
-                    self.set_text(elem=self.label1, text=json_dict[count]["body"])
-
-        asyncio.run(main())
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    window = MainWindow()
-
-    app.exec()
-
-
-########################################################################################################################
-

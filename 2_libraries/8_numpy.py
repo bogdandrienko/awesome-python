@@ -1,3 +1,6 @@
+########################################################################################################################
+# TODO библиотека numpy
+
 # Python program for
 # Creation of Arrays
 import numpy as np
@@ -59,3 +62,5 @@ print("\nSum of all array "
 # Adding two arrays
 # Performing Binary operations
 print("\nArray sum:\n", a + b)
+
+########################################################################################################################
