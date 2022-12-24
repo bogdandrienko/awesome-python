@@ -1,0 +1,82 @@
+[
+  {
+    "type": "WPA",
+    "date": 1666451743,
+    "essid": "ZTC_1",
+    "bssid": "AC:84:C6:5B:45:34",
+    "key": "54154557",
+    "handshake_file": "hs/handshake_ZTC1_AC-84-C6-5B-45-34_2022-10-21T02-39-48.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666337089,
+    "essid": "ZTC_7",
+    "bssid": "BC:0F:9A:26:9B:94",
+    "key": "38311024",
+    "handshake_file": "hs/handshake_ZTC7_BC-0F-9A-26-9B-94_2022-10-21T00-07-18.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666341676,
+    "essid": "ZTC_8",
+    "bssid": "C4:E9:0A:DA:C8:5D",
+    "key": "00204019",
+    "handshake_file": "hs/handshake_ZTC8_C4-E9-0A-DA-C8-5D_2022-10-20T20-59-20.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666335190,
+    "essid": "ZTC_15",
+    "bssid": "CC:2D:21:D1:C0:41",
+    "key": "21001769",
+    "handshake_file": "hs/handshake_ZTC15_CC-2D-21-D1-C0-41_2022-10-21T00-50-17.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666349679,
+    "essid": "ZTC_21",
+    "bssid": "E8:65:D4:1E:A8:08",
+    "key": "01000818",
+    "handshake_file": "hs/handshake_ZTC21_E8-65-D4-1E-A8-08_2022-10-20T12-24-23.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666349622,
+    "essid": "ZTC_22",
+    "bssid": "BC:0F:9A:1C:6C:28",
+    "key": "41730874",
+    "handshake_file": "hs/handshake_ZTC22_BC-0F-9A-1C-6C-28_2022-10-20T13-20-14.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666334211,
+    "essid": "ZTC_30",
+    "bssid": "0C:80:63:5D:50:BC",
+    "key": "17425421",
+    "handshake_file": "hs/handshake_ZTC30_0C-80-63-5D-50-BC_2022-10-21T01-21-23.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666333407,
+    "essid": "ZTC_35",
+    "bssid": "D8:32:14:39:C9:60",
+    "key": "57470184",
+    "handshake_file": "hs/handshake_ZTC35_D8-32-14-39-C9-60_2022-10-21T01-33-17.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666453570,
+    "essid": "ZTC_39",
+    "bssid": "D8:32:14:39:C4:10",
+    "key": "29543328",
+    "handshake_file": "hs/handshake_ZTC39_D8-32-14-39-C4-10_2022-10-21T02-11-31.cap"
+  },
+  {
+    "type": "WPA",
+    "date": 1666335324,
+    "essid": "TP-LINK_A04FE1",
+    "bssid": "98:48:27:A0:4F:E1",
+    "key": "02960319",
+    "handshake_file": "hs/handshake_TPLINKA04FE1_98-48-27-A0-4F-E1_2022-10-21T00-10-28.cap"
+  }
+]
