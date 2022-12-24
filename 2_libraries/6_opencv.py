@@ -6,9 +6,9 @@ import cv2
 import httplib2
 import numpy
 
-path = "img.jpg"
+path = "python.jpg"
 
-# C:\Project\Github_Projects\PyE-221-1\dino.jpg - абсолютный
+# C:\Project\Github_Projects\python-study\2_libraries\python.jpg - абсолютный
 # dino.jpg - относительный
 
 # img = пиксели (матрица)
@@ -20,11 +20,16 @@ new_width = 1280
 new_height = 720
 quality = 95
 
+cv2.waitKey(1)  # для задержки отображения кадра (если изображение, то нужен параметр 1)
+
+# cv2.imshow('IMREAD_GRAYSCALE', img1)  # рендерит(отрисовывает на экране) массив пикселей - изображение
+cv2.imshow('IMREAD_COLOR', img2)  # рендерит(отрисовывает на экране) массив пикселей - изображение
+
+cv2.waitKey(1)  # для задержки отображения кадра (если изображение, то нужен параметр 1)
+
 resized = cv2.resize(img1, (new_width // 2, new_height // 2), interpolation=cv2.INTER_AREA)
 image_gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
-
 cv2.imshow('image_gray', image_gray)  # рендерит(отрисовывает на экране) массив пикселей - изображение
-
 cv2.waitKey(1)  # для задержки отображения кадра (если изображение, то нужен параметр 1)
 
 # cv2.imwrite('dino2.jpg', img)

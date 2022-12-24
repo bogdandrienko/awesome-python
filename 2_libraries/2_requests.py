@@ -65,12 +65,21 @@ with open("data/python.html", "w", encoding="utf-8") as f:
 ########################################################################################################################
 # TODO get image binary data and write
 
+
+
+
 # url = "https://mirpozitiva.ru/wp-content/uploads/2019/11/1472042719_15.jpg"
 url = "https://picsum.photos/320/240/"
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                   'Chrome/102.0.0.0 Safari/537.36'
 }
+
+# requests.packages.urllib3.disable_warnings()
+# import urllib3
+# urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+# response = requests.get(url=url, headers=headers, verify=False)
+
 response = requests.get(url=url, headers=headers)
 
 with open("temp/img.jpg", "wb") as opened_file:

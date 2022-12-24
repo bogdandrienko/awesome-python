@@ -1,78 +1,18 @@
-sudo apt update -y
-sudo apt install -y postgresql postgresql-contrib
-sudo systemctl status postgresql  # check active
+# TODO EXTRA ###########################################################################################################
 
-sudo passwd postgres  # input new password
-sudo -i -u postgres
+set /p project_variable= "Please set your project name: "
 
+IF "%project_variable%"=="" (set project_variable="project_folder")
 
-createuser flask_user
-psql
-\password # input new password
+mkdir %project_variable% && cd %project_variable%
 
-ALTER USER flask_user WITH ENCRYPTED password '12345qwertY!';
+set /p env_variable= "Please set your virtual environment name: "
 
-CREATE DATABASE flask_database OWNER flask_user;
+IF "%env_variable%"=="" (set env_variable="env")
 
+python -m venv %env_variable%
 
-
-\q
-exit
-
-sudo systemctl stop postgresql && sudo systemctl restart postgresql && sudo systemctl status postgresql
-
-
-sudo -i -u postgres
-psql
-
-\connect flask_database
-
-
-GRANT ALL PRIVILEGES ON DATABASE flask_database to flask_user;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to flask_user;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to flask_user;
-GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public to flask_user;
-
-
-CREATE TABLE zarplata ( id serial PRIMARY KEY, username VARCHAR ( 50 ) NOT NULL, salary INT NOT NULL );
-
-# ! CREATE TABLE !
-
-select * from zarplata;
-
-INSERT INTO zarplata (username, salary) VALUES ('Bogdan', '60000'), ('Alice', '80000');
-
-# INSERT 0 2
-
-select * from zarplata;
-
-select username from zarplata where salary > 70000;
-
-\q
-exit
-
-sudo apt install -y curl
-
-curl -fsSL https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgadmin.gpg
-
-sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
-sudo apt update && sudo apt upgrade
-sudo apt install -y pgadmin4-desktop
-
-sudo adduser ubuntu vboxsf # ubuntu = linux account
-
-# https://www.how2shout.com/linux/install-postgresql-pgadmin-4-on-ubuntu-22-04-lts-jammy-linux/
-
-!
-
-
-
-
-
-
-
-
-
+call %env_variable%/Scripts/activate.bat
 
 # TODO WINDOWS #########################################################################################################
 
@@ -239,6 +179,10 @@ alter user django_user with password '12345Qwerty!';
 CREATE DATABASE django_database OWNER django_user;
 GRANT ALL PRIVILEGES ON DATABASE django_database TO django_user;
 
+#GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to django_user;
+#GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to django_user;
+#GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public to django_user;
+
 sudo nano /etc/postgresql/14/main/postgresql.conf
 # <file> /etc/postgresql/14/main/postgresql.conf
 # listen_addresses = '*'
@@ -270,6 +214,15 @@ select * from zarplata;
 
 delete from zarplata where username = 'Bogdan';
 select * from zarplata;
+
+# todo postgresql-pgadmin
+# https://www.how2shout.com/linux/install-postgresql-pgadmin-4-on-ubuntu-22-04-lts-jammy-linux/
+
+curl -fsSL https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgadmin.gpg
+
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+sudo apt update && sudo apt upgrade
+sudo apt install -y pgadmin4-desktop
 
 # TODO POSTGRESQL ######################################################################################################
 
@@ -872,254 +825,3 @@ sudo docker-compose up --build
 source start.sh
 
 # TODO DOCKER ##########################################################################################################
-
-
-
-
-
-
-
-
-
-# Итераторы
-mylist = [1, 2, 3]
-for i in mylist :
-   print(i)
-
-
-mylist = [x*x for x in range(3)]
-for i in mylist :
-  print(i)
-
-# Это удобно, потому что можно считывать из них значения сколько потребуется —
-# однако все значения хранятся в памяти, а это не всегда желательно, если у вас много значений.
-
-# Генераторы
-mygenerator = (x*x for x in range(3))
-for i in mygenerator :
-  print(i)
-# Генераторы это тоже итерируемые объекты, но прочитать их можно лишь один раз. Это связано с тем,
-# что они не хранят значения в памяти, а генерируют их на лету
-
-# Yield это ключевое слово, которое используется примерно как return — отличие в том,
-# что функция вернёт генератор
-
-def createGenerator() :
-    mylist = range(3)
-    for i in mylist :
-        yield i*i
-mygenerator = createGenerator() # создаём генератор
-print(mygenerator) # mygenerator является объектом!
-for i in mygenerator:
-  print(i)
-
-
-# корутины
-
-import asyncio
-
-async def count_to_three():
-    print("Веду отсчёт. 1")
-    await asyncio.sleep(0)
-    print("Веду отсчёт. 2")
-    await asyncio.sleep(0)
-    print("Веду отсчёт. 3")
-    await asyncio.sleep(0)
-
-coroutine_counter = count_to_three()
-print(coroutine_counter)  # <coroutine object count_to_three at 0x7f5a58486a98>
-coroutine_counter.send(None)  # Выведет "Веду отсчёт. 1"
-coroutine_counter.send(None)  # Выведет "Веду отсчёт. 2"
-coroutine_counter.send(None)  # Выведет "Веду отсчёт. 3"
-coroutine_counter.send(None)  # Выбросит ошибку StopIteration
-
-############################################
-# виртуальное окружение и наследование глобальных пакетов
-virtualenv --system-site-packages mycoolproject
-############################################
-
-#########################################
-# запуск скрипта
-python -m pdb my_script.py
-#########################################
-
-############################################
-# генераторы
-from contextlib import contextmanager
-
-@contextmanager
-def open_file(name):
-    f = open(name, 'w')
-    yield f
-    f.close()
-###############################################
-
-############################################
-# else в циклах
-for n in range(2, 10):
-    for x in range(2, n):
-        if n % x == 0:
-            print( n, 'equals', x, '*', n/x)
-            break
-    else:
-        # Цикл не нашел целочисленного делителя для n
-        print(n, 'is a prime number')
-########################################
-
-####################################
-# отладчик python
-import pdb
-
-def make_bread():
-    pdb.set_trace()
-    return "У меня нет времени"
-
-print(make_bread())
-######################################
-
-###########################################
-# тернарные операторы
-is_nice = True
-state = "nice" if is_nice else "not nice"
-############################################
-
-#######################################################
-# распаковка
-def profile():
-    name = "Danny"
-    age = 30
-    return name, age
-
-profile_name, profile_age = profile()
-print(profile_name)
-# Вывод: Danny
-
-print(profile_age)
-# Вывод: 30
-#####################################################
-
-
-###########################################################
-# магические переменные *args и **kwargs
-def test_var_args(f_arg, *argv):
-    print("Первый позиционный аргумент:", f_arg)
-    for arg in argv:
-        print("Другой аргумент из *argv:", arg)
-
-test_var_args('yasoob', 'python', 'eggs', 'test')
-
-
-def greet_me(**kwargs):
-    for key, value in kwargs.items():
-        print("{0} = {1}".format(key, value))
-
->>> greet_me(name="yasoob")
-name = yasoob
-###########################################################
-
-######################################################
-# enumerate
-my_list = ['apple', 'banana', 'grapes', 'pear']
-for c, value in enumerate(my_list, 1):
-    print(c, value)
-
-# Вывод:
-# 1 apple
-# 2 banana
-# 3 grapes
-# 4 pear
-
-
-my_list = ['apple', 'banana', 'grapes', 'pear']
-counter_list = list(enumerate(my_list, 1))
-print(counter_list)
-# Вывод: [(1, 'apple'), (2, 'banana'), (3, 'grapes'), (4, 'pear')]
-####################################################
-
-###################################################
-# map
-items = [1, 2, 3, 4, 5]
-squared = list(map(lambda x: x**2, items))
-
-
-def multiply(x):
-    return (x*x)
-def add(x):
-    return (x+x)
-
-funcs = [multiply, add]
-for i in range(5):
-    value = list(map(lambda x: x(i), funcs))
-    print(value)
-
-# Вывод:
-# [0, 0]
-# [1, 2]
-# [4, 4]
-# [9, 6]
-# [16, 8]
-####################################################
-
-####################################################
-# filter
-number_list = range(-5, 5)
-less_than_zero = list(filter(lambda x: x < 0, number_list))
-print(less_than_zero)
-
-# Вывод: [-5, -4, -3, -2, -1]
-######################################################
-
-######################################################
-#
-product = 1
-list = [1, 2, 3, 4]
-for num in list:
-    product = product * num
-
-# product = 24
-
-
-from functools import reduce
-product = reduce((lambda x, y: x * y), [1, 2, 3, 4])
-
-# Вывод: 24
-##################################################
-
-##################################################
-# generator
-def generator_function():
-    for i in range(10):
-        yield i
-
-for item in generator_function():
-    print(item)
-
-# Вывод: 0
-# 1
-# 2
-# 3
-# 4
-# 5
-# 6
-# 7
-# 8
-# 9
-##################################################
-
-###################################################
-# корутины
-def grep(pattern):
-    print("Searching for", pattern)
-    while True:
-        line = (yield)
-        if pattern in line:
-            print(line)
-search = grep('coroutine')
-next(search)
-# Вывод: Searching for coroutine
-search.send("I love you")
-search.send("Don't you love me?")
-search.send("I love coroutines instead!")
-# Вывод: I love coroutines instead!
-####################################################
-
