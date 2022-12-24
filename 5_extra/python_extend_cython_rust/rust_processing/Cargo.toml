@@ -1,0 +1,16 @@
+[package]
+name = "rust_processing"
+version = "0.1.0"
+authors = ["MyName"]
+edition = "2018"
+
+[lib]
+name = "rust_processing"
+crate-type = ["cdylib"]
+
+[dependencies]
+rand = "0.8.4"
+
+[dependencies.cpython]
+version = "0.5"
+features = ["extension-module"]
