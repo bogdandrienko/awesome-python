@@ -22,8 +22,22 @@ with open('z_new.txt', 'r') as file2:
     print(lines1)
     # внутри контекстного менеджера
 
+
 # снаружи контекстного менеджера
 
+# class New_open:
+#     def __init__(self, file_name, mode):
+#         self.file = open(file_name, mode)
+#
+#     def __enter__(self):
+#         return self.file
+#
+#     def __exit__(self, exc_type, exc_val, exc_tb):
+#         self.file.close()
+#
+#
+# with New_open('z_new.txt', 'r') as f:
+#     line1 = f.read()
 
 ########################################################################################################################
 
