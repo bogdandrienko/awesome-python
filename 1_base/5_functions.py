@@ -128,7 +128,7 @@ def sort1(x):
     return x["age"]
 
 
-sorted_peoples1 = sorted(peoples1, key=lambda x: x["age"], reverse=True)
+sorted_peoples1 = sorted(peoples1, key=sort1, reverse=True)
 print(sorted_peoples1)
 
 sorted_peoples1.sort(key=lambda x: x["age"], reverse=True)  # меняет исходный объект
@@ -301,6 +301,24 @@ def func1(var1):
 
 
 func1(local_var)
+
+########################################################################################################################
+
+########################################################################################################################
+# TODO "кэширование/мемоизация аргументов"
+
+from functools import partial
+
+
+def multiply(x, y):
+    return x * y
+
+
+double = partial(multiply, 2)
+
+result1 = double(5)
+
+print(result1)  # 10
 
 ########################################################################################################################
 

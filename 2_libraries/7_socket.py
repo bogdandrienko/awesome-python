@@ -46,10 +46,10 @@ def process_server():
 def process_client():
     def client_connection():
         config["is_play_connection"] = True
-        # host = "127.0.0.1"
-        # port = 8000
-        host = "172.30.23.16"
-        port = 8888
+        host = "127.0.0.1"
+        port = 8000
+        # host = "172.30.23.16"
+        # port = 8888
 
         my_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         my_socket.connect((host, port))

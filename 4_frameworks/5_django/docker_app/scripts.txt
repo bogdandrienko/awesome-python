@@ -1,3 +1,0 @@
-sudo docker-compose run web django-admin startproject docker_app_dir .
-sudo chown -R $USER:$USER docker_app_dir
-sudo docker-compose up

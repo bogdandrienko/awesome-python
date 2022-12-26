@@ -99,13 +99,14 @@ str_from_user1 = input("Введите Ваше имя: ")
 print(str_from_user1)
 
 # получение элементов из коллекции
+#              0123456       -2-1
 source_str1 = "Python is awesome"
 
 source_str2 = source_str1[2]
-print(source_str2)
+print(source_str2)  # t
 
 source_str3 = source_str1[-2]
-print(source_str3)
+print(source_str3)  # m
 
 source_str4 = source_str1[2:6:1]
 print(source_str4)

@@ -9,7 +9,7 @@ import shutil
 # режимы: w r a wb rb w+ r+
 
 # ручное закрытие файла
-file1 = open('z_new.txt', 'w')  # файловый-объект, если файл в папке 'data' - open('data/z_new.txt', 'w')
+file1 = open('z_new.txt', mode='w')  # файловый-объект, если файл в папке 'data' - open('data/z_new.txt', 'w')
 file1.write("Python is awesome!123\n\thi")
 file1.close()
 
@@ -52,7 +52,7 @@ with open('z_new.txt', 'r') as file2:
 dict1 = {"name": "Bogdan"}
 # запись
 with open('data/new.json', 'w') as file1:
-    # todo сразу запись в файл словаря
+    # todo сразу запись словаря в файл
     json.dump(dict1, file1)
 
     # todo сначала сериализуем словарь в json_строку
@@ -110,16 +110,16 @@ finally:
         print(error)
         shutil.rmtree('temp')  # удаление не пустой папки
 
-os.mkdir("data")
+os.mkdir("data")  # make directory
 
 os.mkdir("data1")
-os.rmdir("data1")
+os.rmdir("data1")  # remove directory
 
 for filename in os.listdir(''):
     print(filename)
 
 
-# os.rename()
+# os.rename()  # переименовать
 # os.path.exists()
 
 # shutil.copy()

@@ -5,10 +5,12 @@ list_val1 = [1, 2, 3, 4, 5, 6]
 for i in list_val1:
     print(i)
 
+#        ["P", "y", "t"...]
 for j in "Python":
     print(j)
 
-for i in range(1, 100, 1):
+#            start stop step
+for i in range(1, 100+1, 1):
     print(i)
 
 for i in range(100, 1, -1):  # [100, 99... 2]
@@ -19,9 +21,9 @@ for i in range(1, 100, 1):
     for j in "Python":
         print(str(i) + " | " + j)
 
-# сумма всех нечётных чисел до 100
+# сумма всех чётных чисел до 100
 sum1 = 0
-for i in range(1, 10):
+for i in range(1, 100+1, 1):
     if i % 2 == 0:
         sum1 = sum1 + i
     else:

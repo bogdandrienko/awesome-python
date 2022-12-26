@@ -93,23 +93,19 @@ with open("temp/img.jpg", "wb") as opened_file:
 import asyncio
 import aiohttp
 
-url = 'https://picsum.photos/600/600/'
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                  'AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/102.0.0.0 Safari/537.36'
-}
 
-
-async def as_write_image_from_url(image_name: str) -> None:
+async def async_download(num: int) -> None:
     async with aiohttp.ClientSession() as session:
-        async with session.get(url=url, headers=headers) as response_instance:
-            response = await response_instance.read()
-            with open(f'data/{image_name}.jpg', mode='wb') as file:
-                file.write(response)
+        async with session.get(url=f"https://jsonplaceholder.typicode.com/todos/{num}") as response_instance:
+            response = await response_instance.json()
+            with open(f"data/new{num}.json", mode="w") as file_object:
+                json.dump(response, file_object)
 
 
-def async_download_image():
-    asyncio.run(asyncio.gather(*[as_write_image_from_url(f'img{i}') for i in range(1, 10 + 1)]))
+if __name__ == '__main__':
+    async def start():
+        return await asyncio.gather(*[async_download(num) for num in range(1, 50 + 1)])
+
+    asyncio.run(start())
 
 ########################################################################################################################
