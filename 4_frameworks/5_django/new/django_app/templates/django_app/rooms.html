@@ -1,0 +1,13 @@
+{% extends 'django_app/base.html' %}
+
+{% block main %}
+    <ul class="container container-fluid w-50">
+        {% for room in rooms %}
+            <li class="border">
+                <a href="{% url 'room' room.slug %}" class="text-decoration-none lead">{{ room.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock main %}
+
+{% block scripts %}{% endblock scripts %}

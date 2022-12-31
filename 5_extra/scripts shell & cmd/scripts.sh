@@ -273,8 +273,8 @@ gunicorn --bind 0.0.0.0:8000 django_settings.wsgi
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.bashrc
 nvm ls-remote
-nvm install 18.10.0
-nvm use 18.10.0
+nvm install 18.12.1
+nvm use 18.12.1
 node --version
 
 npx create-react-app frontend --template redux-typescript
