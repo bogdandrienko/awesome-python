@@ -1,3 +1,55 @@
+# TODO CLEAR CACHE #####################################################################################################
+
+# login to root user
+sudo -i
+
+# clear all caches (echo 1|echo 2|echo 3)
+sync; echo 3 > /proc/sys/vm/drop_caches
+
+# TODO CLEAR CACHE #####################################################################################################
+
+
+
+# TODO SETUP UBUNTU ####################################################################################################
+
+# create ubuntu VM (2023_01_05_ubuntu_22_04_desktop)
+# change VM settings (network, ram, core, shared folder, shared clipboard...)
+# setup ubuntu desktop lts (Normal installation (user + user-PC) + download updates + install third-party software)
+# change resolution to 1400*900 (settings -> display)
+# update system
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+# set dark theme and color (settings -> appearance)
+# disable show personal folder (settings -> appearance)
+# set panel to bottom (settings -> appearance -> dock)
+# set backgroud image (settings -> backgroud)
+# remove apps from panel
+# add russian language (settings -> region & language)
+# add russian to keyboard (settings -> keyboard)
+
+
+# insert guest additions iso => Files >> CD Drive (VBOX_GAs_6.1.32) >> autorun.sh (Right-click) >> Run as a Program
+sudo adduser user vboxsf
+# eject guest additions
+
+# hide bottom(left) panel
+sudo apt install gnome-shell-extensions -y
+# >> Apps >> Extension manager >> disable ubuntu dock
+
+# hide top panel
+sudo apt install gnome-shell-extension-manager -y
+# >> Apps >> Extension manager >> Browse >> Hide Top Bar >> Install >> Apps >> gnome-shell-extensions (disable all checkboxes without 'show in overview')
+
+# install chrome from .deb
+sudo snap install pycharm-professional --classic
+sudo snap install code --classic
+
+# TODO SETUP UBUNTU ####################################################################################################
+
+
+
 # TODO EXTRA ###########################################################################################################
 
 set /p project_variable= "Please set your project name: "
@@ -103,7 +155,10 @@ sudo apt-get install -y build-essential libpq-dev unixodbc-dev zlib1g-dev libncu
 sudo apt-get install -y python3-dev python3-pip python3-venv
 
 # main modules
-sudo apt-get install -y nginx gunicorn git curl wget htop net-tools docker-compose virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso virtualbox-guest-utils
+sudo apt-get install -y nginx gunicorn git curl wget net-tools docker-compose
+
+# vbox modules
+sudo apt-get install -y virtualbox virtualbox-ext-pack virtualbox-guest-additions-iso virtualbox-guest-utils
 
 # clear cache
 sudo apt-get autoremove -y
@@ -221,7 +276,7 @@ select * from zarplata;
 curl -fsSL https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgadmin.gpg
 
 sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
-sudo apt update && sudo apt upgrade
+sudo apt update -y && sudo apt upgrade -y
 sudo apt install -y pgadmin4-desktop
 
 # TODO POSTGRESQL ######################################################################################################
@@ -273,8 +328,8 @@ gunicorn --bind 0.0.0.0:8000 django_settings.wsgi
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.bashrc
 nvm ls-remote
-nvm install 18.12.1
-nvm use 18.12.1
+nvm install 18.10.0
+nvm use 18.10.0
 node --version
 
 npx create-react-app frontend --template redux-typescript
