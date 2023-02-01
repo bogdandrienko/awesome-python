@@ -245,7 +245,6 @@ def todo_create():
         connection.close()
     return redirect(url_for('todo_list'))
 
-
 @app.route("/todo_list")  # 'http://192.168.1.121:5000' + '/' - маршрут в браузерной строке
 def todo_list():
     conn = psycopg2.connect("dbname=flask_db user=postgres password=31284bogdan")

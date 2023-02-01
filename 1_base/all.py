@@ -335,9 +335,6 @@ finally:
     connection.close()
     cursor.close()
 
-
-
-
 ########################################################################################################################
 
 import random
@@ -507,7 +504,6 @@ if __name__ == '__main__':
     iterator()
     pass
 
-
 ########################################################################################################################
 
 values = [1, False, 2, "Python", 3]
@@ -584,7 +580,6 @@ for i in arr1:
     #     continue
 print(list8)  # ['Python', 'Purum']
 
-
 ########################################################################################################################
 
 import requests
@@ -628,7 +623,6 @@ name = f"temp/image{random.randint(1, 1000000)}.jpg"
 with open(name, "wb") as opened_file:
     opened_file.write(image_data)
 
-
 # https://tproger.ru/translations/opencv-python-guide/
 # https://habr.com/ru/post/528144/
 
@@ -636,6 +630,8 @@ with open(name, "wb") as opened_file:
 # print(str1[0:-4:1])
 
 image_data = cv2.imread(name, 0)
+
+
 # image_data = cv2.resize(image_data, (400, 400))
 # image_data = image_data
 # im_resize = cv2.resize(image_data, None, fx=1.0, fy=1.0)
@@ -670,7 +666,6 @@ gray_image = cv2.cvtColor(image_data, cv2.COLOR_BGR2GRAY)
 # cv2.imshow("threshold_image", threshold_image)
 # cv2.waitKey(0)
 cv2.imwrite("temp/new_image.jpg", image_data)
-
 
 ########################################################################################################################
 
@@ -766,7 +761,6 @@ def summing7(a2: float, b2: float) -> Union[float, int]:
 
 print(12 / summing7(1, 2))
 
-
 print(*(12, 15))
 print(12, 15)
 
@@ -788,4 +782,12 @@ print(age=12, age2=15)
 
 
 ########################################################################################################################
+# TODO metaclass
 
+class MyMeta(type):
+    def __new__(cls, name, bases, namespace):
+        return super().__new__(cls, name, bases, namespace)
+
+
+class MyClass(metaclass=MyMeta):
+    x = 3
