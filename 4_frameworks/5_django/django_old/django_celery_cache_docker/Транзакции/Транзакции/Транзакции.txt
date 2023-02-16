@@ -53,6 +53,46 @@ def create_users(request):
 	finally:
 		pass
 
+# @transaction.atomic()
+@transaction.non_atomic_requests()
+def index(request):
+
+    try:
+        transaction.savepoint('create user')
+        User.objects.create(username="Admin")
+        print(1 / 0)  # error
+    except Exception as error:
+        print(error)
+        transaction.savepoint_rollback('create user')
+        # transaction.rollback()
+    else:
+        transaction.savepoint_commit('create user')
+        # transaction.commit()
+    finally:
+        pass
+
+    connection.autocommit = False
+    cursor = connection.cursor()
+
+    try:
+        connection.autocommit = False
+        cursor.execute("insert into zarplata (username, salary) VALUES ('Bogdan5', '666');")
+        # cursor.execute("insert into zarplata (username, salary) VALUES ('Bogdan', '666');")
+
+        # print(10 / 0)
+        # connection.commit()
+    except Exception as error:
+        print(f"ERROR: {error}")
+        connection.rollback()
+    else:
+        pass
+    finally:
+        connection.close()
+        cursor.close()
+
+    users_list = [{"username": f"{user.username}", "email": f"{user.email}"} for user in User.objects.all()]
+    return JsonResponse(data=users_list, safe=False)
+
 # views.py
 
 

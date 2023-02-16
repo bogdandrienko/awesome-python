@@ -100,7 +100,7 @@ print(str_from_user1)
 
 # получение элементов из коллекции
 #              0123456       -2-1
-source_str1 = "Python is awesome"
+source_str1 = "Python is awesome"  # ['P', 'y', 't'...]
 
 source_str2 = source_str1[2]
 print(source_str2)  # t
