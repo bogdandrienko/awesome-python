@@ -11,7 +11,18 @@ import shutil
 # ручное закрытие файла
 file1 = open('z_new.txt', mode='w')  # файловый-объект, если файл в папке 'data' - open('data/z_new.txt', 'w')
 file1.write("Python is awesome!123\n\thi")
+# print(1/0)
 file1.close()
+
+file1 = open('z_new.txt', mode='w')  # файловый-объект, если файл в папке 'data' - open('data/z_new.txt', 'w')
+try:
+    file1.write("Python is awesome!123\n\thi")
+except Exception as error:
+    print(error)
+else:
+    pass
+finally:
+    file1.close()
 
 # контекстный менеджер
 with open('z_new.txt', 'r') as file2:
