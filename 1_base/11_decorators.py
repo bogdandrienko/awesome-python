@@ -38,9 +38,18 @@ def divider(value1, value2):
     res = value1 / value2
     return res  # возврат результата функции
 
+def round_new(val):
+    return round(val, 2)
+
+
+res1 = summing(-12, 17.0006, 1)
+print(round_new(res1))  # вызов функции и вывод результата
+print(round_new(divider(12, -17)))  # вызов функции и вывод результата
 
 print(summing(-12, 17.0006, 1))  # вызов функции и вывод результата
-print(divider(12, -17))  # вызов функции и вывод результата
+print(divider(12, -17))  # вызов функции и вывод результата # todo позиционные
+print(divider(value1=12, value2=-17))  # вызов функции и вывод результата # todo именнованные
+
 
 
 # замер производительности
@@ -78,7 +87,7 @@ print(function_something_read())
 # наслоение декораторов
 def twice(function):
     def wrapper(*args, **kwargs):
-        result = function(args, kwargs)
+        result = function(*args, **kwargs)
         return result * 2
 
     return wrapper
@@ -86,7 +95,7 @@ def twice(function):
 
 def rounding(function):
     def wrapper(*args, **kwargs):
-        result = function(args, kwargs)
+        result = function(*args, **kwargs)
         return round(result, 3)
 
     return wrapper

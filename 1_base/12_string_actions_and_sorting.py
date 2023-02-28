@@ -4,6 +4,7 @@
 import base64
 import chardet
 
+#        0  1  2     3         4               5                   6
 list1 = [1, 2, 5, [3, 2, 6], {"key_1": 1}, {1, 2, 3, 5, 7, "123"}, 5]
 tuple1 = (1, 2, 5, [3, 2, 6], {"key_1": 1}, {1, 2, 3, 5, 7, "123"}, 5)
 str1 = "Banana"
@@ -23,8 +24,10 @@ list2 = [1, 2, 5, 10, 4, 2]
 list2.sort()
 print(list2)
 
+#       01
 str1 = "Award"
 print(str1.index("w"))
+print("".join(sorted(str1)))
 
 char1 = ord("A")  # получаем индекс(число) строчного элемента
 print(char1)
