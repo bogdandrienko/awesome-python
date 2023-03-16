@@ -17,20 +17,20 @@ import datetime
 #  Велосипед Машина Мотоцикл гидро скутер Лодка - текстуры, цвет
 
 # TODO простой пример
-class Mother1(object):
-    val1 = 12
+class Mother1:  # (object)
+    eyes = "blue"  # Атрибут класса
 
 
 class Child1(Mother1):
-    val2 = 13
+    height = 1.8  # Атрибут класса
 
 
-print(Mother1.val1)
 m1 = Mother1()
-print(m1.val1)
+print(m1.eyes)
 
-ch1 = Child1
-print(ch1.val1)
+ch1 = Child1()
+print(ch1.eyes)
+print(ch1.height)
 
 
 # TODO пример сложнее

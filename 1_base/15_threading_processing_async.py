@@ -9,6 +9,22 @@ import asyncio
 import requests
 import aiohttp
 
+import requests
+import time
+
+print(1)
+print(2)
+
+# todo блокирующая
+for i in range(1, 5+1):
+    p = requests.get('https://upload.wikimedia.org/wikipedia/commons/a/a2/Python_royal_35.JPG')
+    with open(f"temp/img{i}.jpg", "wb") as f:
+        # time.sleep(3.0)
+        f.write(p.content)
+# todo блокирующая
+
+print(3)
+
 # sync VS async VS threading VS multiprocessing
 
 # sync =                1 процесс: 1 поток
