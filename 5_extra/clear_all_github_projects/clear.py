@@ -9,6 +9,8 @@ if __name__ == "__main__":
         for folder in dirs:
             print(folder)
             if folder in ["env", "venv", "node_modules", ".idea", "__pycache__"]:
+                if folder == "clear_all_github_projects":
+                    continue
                 try:
                     # os.rmdir(os.path.join(root, folder))
                     shutil.rmtree(os.path.join(root, folder))
