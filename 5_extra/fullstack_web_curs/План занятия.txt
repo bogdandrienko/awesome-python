@@ -1,0 +1,24 @@
+0. Настройка IDE и плагины
+
+1. Схема взаимодействия frontend + backend:
+* rest
+* websocket
+...
+
+2. Развёртывание и настройка react frontend
+* nodejs, cra и шаблоны
+* компоненты и вёрстка через jsx
+* сервер-разработки и сборка
+* собственные стили (css) vs библиотеки (bootstrap / taiwind / material-ui)
+
+3. Развёртывание и настройка python backend
+* csrf
+* приём и передача данных
+
+4. React
+* router
+* redux
+...
+
+
+

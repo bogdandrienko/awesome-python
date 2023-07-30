@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Notifications Example</title>
+</head>
+<body>
+    <h1>WebSocket Notifications Example</h1>
+    <ul id="notification-list"></ul>
+    <script>
+        const socket = new WebSocket('ws://localhost:80/ws/site_notifications/1/');
+        console.log(socket);
+        socket.onmessage = function(event) {
+            const notification = JSON.parse(event.data).notification;
+            console.log(notification)
+            const notificationElement = document.createElement('li');
+            notificationElement.innerHTML = notification.message;
+            document.getElementById('notification-list').appendChild(notificationElement);
+        };
+    </script>
+</body>
+</html>

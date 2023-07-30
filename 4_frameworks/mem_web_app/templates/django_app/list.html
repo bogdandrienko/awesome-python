@@ -1,0 +1,47 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% block main %}
+
+<div class="container">
+    <form action="{% url "posts" %}" method="post">
+        {% csrf_token %}
+
+        <div class="input-group text-center w-50">
+            <input name="search" type="text" min="0" max="100" required value="{{ search }}" class="form-control" placeholder="введите часть названия сюда"/>
+            <button type="submit" class="btn btn-secondary">искать</button>
+            <a type="reset" href="/list" class="btn btn-outline-secondary">сбросить</a>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<div class="container marketing my-3">
+<hr class="featurette-divider">
+<div class="row">
+    {% for image in images %}
+        <div class="col-lg-4">
+            <img src="{% static image.image.url %}" alt="image" class="img-fluid" width="200"/>
+            <h2 class="fw-normal">{{ image.title }}</h2>
+            <p>{{ image.description }}</p>
+            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+        </div>
+    {% endfor %}
+</div>
+<hr class="featurette-divider">
+</div>
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+{% endblock main %}

@@ -1,0 +1,49 @@
+<mxfile host="app.diagrams.net" modified="2023-07-07T05:44:38.967Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="sNbjSnWwen0CQxJ1QdFj" version="21.6.1" type="device">
+  <diagram name="Page-1" id="3bkZqJ_5sp8Dv6_jIcIX">
+    <mxGraphModel dx="625" dy="348" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="42" y="204" width="198" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-2" value="микросервисы" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="56" y="216" width="92" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-3" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="109" y="400" width="163" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KemQ0ADkKLRGEy3eNBir-4" target="KemQ0ADkKLRGEy3eNBir-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-4" value="microfront 2" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="114" y="429" width="68" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="KemQ0ADkKLRGEy3eNBir-5" target="KemQ0ADkKLRGEy3eNBir-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-5" value="microfront 1" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="193" y="410" width="75" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-6" value="frontend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160.5" y="363" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-8" value="микросервисы" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="141" y="250" width="92" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-10" value="REST: get, post, put, patch. Время жизни -&amp;gt; запрос-ответ(timeout)." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="307" y="308" width="371" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-11" value="SOAP" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="307" y="457" width="50" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-12" value="Прямые вызовы XML" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="307" y="414" width="134" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="KemQ0ADkKLRGEy3eNBir-13" value="websocket -&amp;gt; поднимается соединение и ждёт" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="307" y="366" width="268.5" height="34" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

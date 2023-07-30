@@ -1,0 +1,18 @@
+.custom-div{
+    color: #00e8ff;
+}
+
+.custom-navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00e8ff;
+}
+
+.custom-div1{
+    background-color: red;
+}
+
+.custom-div2{
+    background-color: #00ff95;
+}

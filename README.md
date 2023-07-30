@@ -1,2 +1,2 @@
-# python-study
-study
+# python-awesome
+all python examples

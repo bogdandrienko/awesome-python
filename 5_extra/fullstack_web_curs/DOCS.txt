@@ -1,0 +1,36 @@
+https://www.python.org/downloads/
+https://nodejs.org/en
+
+https://www.jetbrains.com/ru-ru/pycharm/
+
+https://git-scm.com/downloads
+https://desktop.github.com/
+
+
+
+##################################
+
+
+
+
+prettier - jsx (betify) (snippets (shortcut))
+tabnine
+pylint (PEP8 - pycharm low)
+black connect
+
+
+#######################################
+
+pip install django pillow black[d] pylint
+
+
+npx create-react-app frontend --template redux-typescript
+# 
+
+npm install prettier axios react-router-dom react-player bootstrap @mui/base
+
+npm start
+npm run build
+
+npm i
+
