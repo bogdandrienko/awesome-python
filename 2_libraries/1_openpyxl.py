@@ -15,6 +15,13 @@ print(worksheet.cell(1, 1).value)
 max_row = worksheet.max_row
 max_column = worksheet.max_column
 
+# vals = ["A1", "A2"]
+# idx = 0
+# for item in vals:
+#     idx += 1
+#     # ...
+
+
 rows = []
 for row_index in range(1, max_row + 1):
     row = []
