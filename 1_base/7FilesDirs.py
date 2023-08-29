@@ -126,7 +126,7 @@ os.mkdir("data")  # make directory
 os.mkdir("data1")
 os.rmdir("data1")  # remove directory
 
-for filename in os.listdir(''):
+for filename in os.listdir('.'):
     print(filename)
 
 
