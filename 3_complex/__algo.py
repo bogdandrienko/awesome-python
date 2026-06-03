@@ -51,12 +51,10 @@ class Task1:
                 dictionary1[i] += 1
             else:
                 dictionary1[i] = 1
-
         for i in second:
             if dictionary1.get(i, 0) > 0:
                 result1.append(i)
                 dictionary1[i] -= 1
-
         return result1
 
 
