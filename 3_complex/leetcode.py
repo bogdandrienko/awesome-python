@@ -64,13 +64,13 @@ def isValid_20(self, s: str) -> bool:
             _arr.append(char)
     return len(_arr) == 0
 
-class Solution21:
+class Solution_21:
     class ListNode:
         def __init__(self, val=0, next=None):
             self.val = val
             self.next = next
 
-    def mergeTwoLists(self, list1: any[list], list2: any[list]) -> any[list]:
+    def mergeTwoLists_21(self, list1: any[list], list2: any[list]) -> any[list]:
         """
         Задача: связные списки
         Нужно в один связный список составить элементы объектами друг за другом по возрастанию.
@@ -78,7 +78,7 @@ class Solution21:
         Если значение больше во втором, то там делаем шаг вперёд. И до конца нанизываем их друг на друга.
         Если один из связных списков закончился, то проверяем какой свободен и докидываем в конец.
         """
-        _res = Solution21.ListNode()
+        _res = Solution_21.ListNode()
         _end = _res
         while list1 and list2:
             if list1.val < list2.val:
@@ -127,3 +127,167 @@ def removeElement_27(self, nums: list[int], val: int) -> int:
 
 
 
+class Solution_243:
+    class ListNode:
+        def __init__(self, val=0, next=None):
+            self.val = val
+            self.next = next
+    def isPalindrome_243(self, head: any[ListNode]) -> bool:
+        """
+        Задача: связный список и палиндром
+        Нужно проверить что связный список является палиндромом.
+        """
+
+        stack = []
+        while head:
+            stack.append(head.val)
+            head = head.next
+        # print(stack)
+        return stack == stack[::-1]
+
+        self.front = head
+        self.back = head
+        def recurse(tail: Optional[ListNode]) -> bool:
+            # print('\n', self.front, "===", tail)
+            if not tail:
+                return True
+            if not recurse(tail.next):
+                return False
+            if self.front.val != tail.val:
+                return False
+            self.front = self.front.next
+            return True
+        return recurse(self.back)
+
+
+class Solution_704:
+    def search_704(self, nums: list[int], target: int) -> int:
+        """
+        Задача: бинарный поиск
+        Нужно найти число перебирая отсорированный массив.
+        """
+        # for idx, i in enumerate(nums, 0):
+        #     if i == target:
+        #         print(idx, i)
+        #         return idx
+        # return -1
+        _left = 0
+        _right = len(nums) - 1
+        while _left <= _right:
+            _middle = (_left + _right) // 2
+            _val = nums[_middle]
+            # print(_left, _right, _middle, _val)
+            if _val == target:
+                return _middle
+            if _val < target:
+                _left = _middle + 1
+            else:
+                _right = _middle - 1
+        return -1
+
+
+def lengthOfLastWord_58(self, s: str) -> int:
+    """
+    Задача: строки
+    Нужно очистить строку от боковых пробелов и посчитать количество символов до пробела внутреннего.
+    """
+    # words = s.strip().split()
+    # return len(words[-1])
+
+    _clean_str = s.strip()
+    cnt = 0
+    for i in _clean_str[::-1]:
+        if i == " ":
+            return cnt
+        cnt += 1
+    return cnt
+
+
+def searchInsert_35(self, nums: list[int], target: int) -> int:
+    """
+    Задача: бинарный поиск
+    Нужно найти число перебирая отсорированный массив. Если числа нет, вернуть индекс где оно должно было бы быть.
+    """
+    _left = 0
+    _right = len(nums) - 1
+    while _left <= _right:
+        _mid = (_left + _right) // 2
+        _val = nums[_mid]
+        if _val == target:
+            return _mid
+        if _val < target:
+            _left = _mid + 1
+        else:
+            _right = _mid - 1
+    if nums[_mid] < target:
+        return _mid + 1
+    else:
+        return _mid
+
+def strStr_28(self, haystack: str, needle: str) -> int:
+    """
+    Задача: строки
+    Нужно найти одну строку в другой или вернуть -1.
+    """
+    return haystack.find(needle)
+
+
+
+def plusOne_66(self, digits: list[int]) -> list[int]:
+    """
+    Задача: строки
+    Нужно массив чисел увеличить на 1 и вернуть в таком же формате.
+    """
+    _str = "".join([str(x) for x in digits])
+    # print(_str)
+    _int = int(_str) + 1
+    # print(_int)
+    _arr = [int(x) for x in str(_int)]
+    # print(_arr)
+    return _arr
+
+def romanToInt_13(self, s: str) -> int:
+    """
+    Задача: числа
+    Нужно массив букв латинских через словарь превратить в число, но есть нюанс с приставкой.
+    """
+    _hash = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000,
+    }
+    _sum = 0
+    for i in range(0, len(s)):
+        is_not_end = i + 1 < len(s)
+        _cur = _hash[s[i]]
+        # print('\n', _cur)
+        if is_not_end and _cur < _hash[s[i + 1]]:
+            _next = _hash[s[i + 1]]
+            # print(_next)
+            _sum -= _cur
+        else:
+            _sum += _cur
+    return _sum
+
+def mySqrt_69(self, x: int) -> int:
+    """
+    Задача: бинарный поиск
+    Нужно найти минимальное целое число, из которого получается квадрат целевого значения.
+    """
+    if x < 1:
+        return x
+    _left = 0
+    _right = x
+    while _left <= _right:
+        _mid = (_left + _right) // 2
+        if _mid * _mid == x:
+            return _mid
+        if _mid * _mid < x:
+            _left = _mid + 1
+        else:
+            _right = _mid - 1
+    return _right
