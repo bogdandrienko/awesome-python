@@ -1,0 +1,26 @@
+mkdir pythontest
+cd pythontest
+python -m venv env
+call env/scripts/activate.bat
+pip install requests
+
+
+
+
+
+
+node -v
+MKDIR C:\Users\User\AppData\Roaming\npm
+npx create-react-app frontend
+# создал окружение node 20 LTS и веб приложение за счёт create-react-app, vite шустрее но для собеседования увереннее буду в react
+# создание компонента, функции, проброс пропсов, двойное связывание
+cd frontend
+npm install react-router-dom # маршрутизация + <NavLink to="/login">login</NavLink>
+npm install react-bootstrap bootstrap # import 'bootstrap/dist/css/bootstrap.min.css'; + btn btn-lg border border-1 border-success
+npm install axios # axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {}}).catch((...
+npm install @reduxjs/toolkit react-redux
+npm start
+npm build
+
+
+npm install react-router-dom react-bootstrap bootstrap axios @reduxjs/toolkit react-redux
